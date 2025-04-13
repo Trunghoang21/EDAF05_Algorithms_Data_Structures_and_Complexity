@@ -7,17 +7,58 @@
 \pagestyle{empty}
 
 \title{Word ladders report}
-\author{Author 1 and Author 2}
+\author{Bao Trung Hoang}
 
 \begin{document}
   \maketitle
 
   \section{Results}
 
-  \todo[inline]{Briefly comment the results, did the script say all your solutions were correct? Approximately how long time does it take for the program to run on the largest input? What takes the majority of the time?}
+  
+
+  The implementation was tested on 7 different data inputs and shows great results. The outputs produced by the implementation were identical to all the sample results. 
+
+  When running on the 5large.in file, the implementation takes around 45 minutes to complete. The majority of the execution time is on this file. For the other input file, it takes around 1 - 5 minutes to complete. 
 
   \section{Implementation details}
 
-  \todo[inline]{How did you implement the solution? Which data structures were used? Which modifications to these data structures were used? What is the overall running time? Why?}
+    \subsection{Graph implementation}
+  
+    The solution builds a graph where words are represented by nodes, and the connections exist when one word's last four characters are contained in another word. The Breadth-First Search is then used to find the shortest path between two words.
 
+    To present the graph, a dictionary in Python was used, where the key contains the string for the word and the value corresponding to that key is a set of other nodes, which have a connection to the word contained by the key. 
+
+    \subsection{BFS function}
+
+    The BFS function in the solution finds the shortest path between a start word and an end word. 
+    The function was implemented as follows: 
+    \begin{enumerate}
+        \item If the start and the end are the same word, return 0. 
+        \item The following data structures were used for this assignment: 
+            \begin{itemize}
+                \item a queue for tracking the words to visit. A tuple of the word and the distance between the given word from the starting word. 
+                \item a set for tracking the visited words.
+            \end{itemize}
+        \item the main search loop: 
+            \begin{enumerate}
+                \item While the queue is not empty
+                    \begin{enumerate}
+                        \item Take the next word and its path length from the queue
+                        \item If the word is the target end word, return the path length. 
+                        \item Otherwise, for each unvisited neighbor of the current word
+                            \begin{enumerate}
+                                \item Add it to the queue with path length increased by 1.  
+                            \end{enumerate}
+                    \end{enumerate}
+            \end{enumerate}
+    \end{enumerate}
+
+    The running time can be calculated as follows:
+    \begin{itemize}
+        \item When creating the graph, for each node, we compare it with other nodes. This process has a time complexity of $O(N^2)$ for N is the number of nodes in the graph.
+        \item When performing the BFS, each node will be visited once for each search. This process has the time complexity of $O(L * N)$ for L is the number of edges between nodes.
+        \item The total time complexity is $O( N^2 + L*N)$
+        
+    \end{itemize}
+    
 \end{document}

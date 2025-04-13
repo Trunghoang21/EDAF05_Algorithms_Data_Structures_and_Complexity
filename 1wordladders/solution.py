@@ -77,11 +77,12 @@ def bfs(graph, start, end):
     
     while my_queue:
         (current_word, path_length) = my_queue.popleft()
+        # add the current word to the visisted set. 
+        visited.add(current_word)
         if current_word == end:
             return path_length
         else:
             my_queue.extend((node, path_length + 1) for node in graph[current_word] if node not in visited)
-            visited.add(current_word)
     return 'Impossible'
 
 def main():
@@ -89,12 +90,6 @@ def main():
     read = read_word_list()
     # Construct the graph from the word list
     graph = construct_graph(read[0])
-    #print data and searches
-    #print(f'data: {read[0]}')
-    #print (f'searches: {read[1]}')
-    #print graph
-    #print(f'graph: {graph}')
-    # test the bfs function:
     for search in read[1]:
         print(bfs(graph, search[0], search[1])) 
             
