@@ -13,11 +13,6 @@ class LinearProbingHashTable:
     def _hash(self, key):
         """ Hash the key to an index in the table """
         return hash(key) % self.size
-
-        #hash_value = 5381
-        #for c in key:
-        #    hash_value = ((hash_value << 5) + hash_value) + ord(c)
-        #return hash_value % self.size
         
     def _resize(self):
         """ Resize the hash table if load factor is exceeded """
@@ -46,7 +41,7 @@ class LinearProbingHashTable:
         
     def insert(self, key):
         """ Insert a key-value pair into the hash table """
-        index = self._hash(key)
+        index = self._hash(key) # rewrite the code. 
         if  self.table[index] is None:
             self.table[index] = (key,1)
             self.count += 1
