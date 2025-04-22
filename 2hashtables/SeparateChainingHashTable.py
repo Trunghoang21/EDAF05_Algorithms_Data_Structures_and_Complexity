@@ -6,8 +6,8 @@ class SeparateChainingHashTable:
         self.size = size 
         self.table = [[] for _ in range(size)]
         self.count = 0
-        self.max_load_factor = 0.75 # to change later. 
-        self.min_load_factor = 0.25 # to change later
+        self.max_load_factor = 0.95 # to change later. 
+        self.min_load_factor = 0.1 # to change later
     
     def _hash(self, key):
         """ hash the key to an index in the table """

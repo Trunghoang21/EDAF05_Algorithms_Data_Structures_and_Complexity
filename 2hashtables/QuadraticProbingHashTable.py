@@ -21,7 +21,8 @@ class QuadraticProbingHashTable:
             old_table = self.table
             self.size = self.next_Prime(self.size)
             while self.count / self.size > self.max_load_factor:
-                self.size = self.next_Prime(self.size) # find next suitable prime number.
+                #self.size = self.next_Prime(self.size) # find next suitable prime number.
+                self.size *= 2 # dubble the size of the table.
             self.table = [None] * self.size # initialize a new table with new size.
             self.count = 0 # Reset count berfore reinserting elements. 
             for element in old_table:

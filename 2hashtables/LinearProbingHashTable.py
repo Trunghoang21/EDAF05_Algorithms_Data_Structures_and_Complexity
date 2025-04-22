@@ -6,7 +6,7 @@ class LinearProbingHashTable:
         self.size = size
         self.table = [None] * size  # Using None to indicate empty slots
         self.count = 0
-        self.max_load_factor = 0.75  # Lower than separate chaining
+        self.max_load_factor = 0.9  # Give the best performance. 
 
 
         
