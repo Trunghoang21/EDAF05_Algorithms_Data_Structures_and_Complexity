@@ -7,7 +7,7 @@
 \pagestyle{empty}
 
 \title{Making Friends Report}
-\author{Author 1 and Author 2}
+\author{Bao Trung Hoang}
 
 \begin{document}
   \maketitle
@@ -16,8 +16,49 @@
 
   \todo[inline]{Briefly comment the results, did the script say all your solutions were correct? Approximately how long time does it take for the program to run on the largest input? What takes the majority of the time?}
 
+  The solution passes all the test case, including the largest one.
+  The program takes about 1 minute to run on the largest input. 
+  Most of the time is spent on the largest test case, which is the last one. 
+  
+
+  The process tasks most of the time would be the adjacency list traversal.
+  For each newly visited node, we need to check all the neighbors of that node.
+  This is costly because it has the time complexity of $O(n)$, which will be came 
+  significant for the largest input, containing $3 * 10^6$ nodes.
+
   \section{Implementation details}
 
   \todo[inline]{How did you implement the solution? Which data structures were used? Which modifications to these data structures were used? What is the overall running time? Why?}
+
+  The solution is implemented in Python 3.12.3, adapted to the given data. 
+  The following data structures are used for the solution: 
+  \begin{itemize}
+    \item The adjacency list is used to present the graph. 
+    \begin{itemize}
+      \item The index position of the list represents the node number.
+      \item The value at that index is a list of all neighbors of that node. 
+      \item A neighbor is presented as a tuple of the neighbor node number and the weight of the edge connecting them. 
+    \end{itemize}
+    \item The priority queue is used to store the edges with the smallest weights being processed. 
+    \begin{itemize}
+      \item An empty list is used for this purpose. 
+      \item The \textbf{heapq} module is used to transform the list into the priority queue. 
+      \item The \textbf{heapq.heappush()} function is used to add a new edge to the queue, which 
+      ensures that the edge with the smallest weights is retrieved fist when using the \textbf{heapq.heappop()} function.
+      \item The edges connected to a defined first node will be added to the queue. 
+      The data structure stored in the queue is \textbf{(weight, (source\_node, destination\_node))}, 
+      which is a tuple.
+    \end{itemize}
+    \item The \textbf{visited} list is used to keep track of the nodes that have been visited.
+    \item The \textbf{nodes} list used to store all the node numbers avalilable in the graph.
+  \end{itemize}
+  
+  The following modifications are made to the data structure for the given data: 
+  \begin{itemize}
+    \item The node number is shifted by 1 to match the index position of the adjacency list.
+    \item The priority queue is organized based on the value of the first element, which is the weight of the edge.
+  \end{itemize}
+
+  The time complexity of the solution is as follows:
 
 \end{document}
