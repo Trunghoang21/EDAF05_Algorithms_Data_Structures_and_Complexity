@@ -23,7 +23,7 @@
 
   The process tasks most of the time would be the adjacency list traversal.
   For each newly visited node, we need to check all the neighbors of that node.
-  This is costly because it has the time complexity of $O(n)$, which will be came 
+  This is costly because it has the time complexity of $O(n)$, which will became 
   significant for the largest input, containing $3 * 10^6$ nodes.
 
   \section{Implementation details}
@@ -50,7 +50,7 @@
       which is a tuple.
     \end{itemize}
     \item The \textbf{visited} list is used to keep track of the nodes that have been visited.
-    \item The \textbf{nodes} list used to store all the node numbers avalilable in the graph.
+    \item The \textbf{nodes} list used to store all the node numbers available in the graph.
   \end{itemize}
   
   The following modifications are made to the data structure for the given data: 
@@ -59,6 +59,75 @@
     \item The priority queue is organized based on the value of the first element, which is the weight of the edge.
   \end{itemize}
 
-  The time complexity of the solution is as follows:
+  \todo[inline]{Why does the algorithm produce the minimal spanning tree?}
 
+  The algorithm produces the minimal spanning tree due to the implementation of Prim's algorithm.
+  For each node, the algorithm will always choose the safe edge that connects two nonempty sets, which is 
+  \textbf{nodes} and \textbf{visited}. The process will continue until all the nodes are vissted,
+  ensuring that the minimum cost for the spanning tree. This happens because only the edge with minimal cost is 
+  selected at each step. 
+
+  As mentioned above, the edges are selected when it connects \textbf{nodes} (non-visted) and \textbf{visited} sets.
+  As soon as the edge is selected, the node number of the destination node would be added to the \textbf{visited} set, 
+  and would not be visited again. This ensures that each node is only visited once. 
+  
+  The process guarantees that no cycles are formed, the tree will connect all the nodes if there is a path between arbitrary two nodes.
+  By using the priority queue, and by adding only the minimal cost at each step, the minimal cost for the whole tree 
+  is guaranteed.
+
+  \todo[inline]{What is the time complexity of the algorithm?}
+
+  The time complexity for the algorithm is $O(E * log (V))$, where E is the number of edges and V is the number of nodes.
+  The time complexity is calculated based on the following: 
+  \begin{itemize}
+    \item Creating the adjacency list takes $O(E)$ time.
+    \item Creating a new priority queue and adding the edges takes $O(N)$
+    \item For each node in the graph, the distance to its neighbors will be checked.
+    This has the time complexity of $O (E * log (N))$, which can explain as follows:
+    \begin{itemize}
+      \item The time complexity of adding edges to the priority queue is $O(log (n))$, 
+    where n is the size of the queue. 
+      \item The maximum number of edges is $V*(V -1)/2$, which can be approximated to $O(V^2)$.
+      \item The insertion operation is at most $E$, which leads to the time complexity of $O(E * log (V^2)) = O(E * 2log(V) = O(E * log(V)))$
+      \item The same reasoning can be applied to the extraction process.
+    \end{itemize}
+  \end{itemize}
+
+  We can add up the time complexity of each step to get the overall time complexity,
+  and the dominance term is $O(E * log (V))$.
+  So the overall time complexity is $O(E * log (V))$.
+
+  \todo[inline]{What happens if one of the edges have chosen to include collapses?
+  Might there be any problems with that in real application?}
+
+  There are some consequences if one of the edges is removed from the graph, which are as follows:
+  \begin{itemize}
+    \item The tree will become disconnected, there will be no path between one node with the rest of the tree.
+  This breaks the property of the spanning tree, which is that will be a path to every arbitrary nodes.
+    \item To restore the connectivity of the tree, the entire algorithm is required to run again. This could lead to a less optimal result.
+  \end{itemize}
+
+  In real world applications, this could lead to additional workload for other nodes. This required immediate rerouting.
+  
+  \todo[inline]{The real world applications of the algorithm and the requirements for the problems}
+
+  Some real world applications for the algorithm are as follows:
+  \begin{itemize}
+    \item Designing telecommunication networks
+    \item Creating road network that connects all the locations 
+  \end{itemize}
+  
+  The requirements for the problems are as follows:
+  \begin{itemize}
+    \item The data to the problem have to be presented as connected, undirected, weighted graph. 
+    \item The goal here is to find the minimum cost the entire operation. 
+    \item No cycles are required. 
+    \item The weights for each edge must be positive and meaningful.
+  \end{itemize}
+  
+  
+
+
+  
+  
 \end{document}
