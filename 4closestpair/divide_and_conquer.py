@@ -24,7 +24,27 @@ def closest_pair_recursive(sorted_by_x, sorted_by_y):
 
     # to do, check how to create the strip contains points of the left side and the rigth side
     # check how to create the split lines maybe
-    return smallest
+
+    strip = []
+    mid_x = left_x[-1][0] # get the division line. 
+
+    for point in sorted_by_y:
+        if abs(point[0] - mid_x) < smallest:
+            strip.append(point)
+    # check the smallest distance in the strip
+    smallest_distance_in_strip = check_strip_distance(strip)
+
+    return min(smallest, smallest_distance_in_strip)
+
+def check_strip_distance(strip):
+    min_distance = float('inf') # define the minimum distance
+    strip_length = len(strip)
+    for i in range(len(strip)):
+        for j in range(i +1, min(i +7, strip_length)): # check max 6 points in the strip
+            dist = distance(strip[i], strip[j])
+            if dist < min_distance:
+                min_distance = dist
+    return min_distance
 
 def closest_distance_brute_force(points):
     min_distance = float('inf')
