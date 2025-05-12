@@ -7,7 +7,7 @@
 \pagestyle{empty}
 
 \title{Closest Pair Report}
-\author{Author 1 and Author 2}
+\author{Bao Trung Hoang}
 
 \begin{document}
   \maketitle
@@ -16,8 +16,44 @@
 
   \todo[inline]{Briefly comment the results, did the script say all your solutions were correct? Approximately how long time does it take for the program to run on the largest input? What takes the majority of the time?}
 
+  When running the script, the solution was correct for all test cases.
+
+  On the largest input, the program takes approximately around 13 seconds to run. 
+  For all test cases, it takes around 15 seconds to run.
+
+
+
   \section{Implementation details}
 
   \todo[inline]{How did you implement the solution? Which data structures were used? Which modifications to these data structures were used? What is the overall running time? Why?}
+
+  Step by step for the implementatation: 
+  \begin{itemize}
+    \item sorting the points 
+    \begin{itemize}
+      \item by x coordinate takes $O(n \log n)$ time.
+      \item by y coordinate takes $O(n \log n)$ time.
+    \end{itemize}
+    \item recursive call, splitting the points into two halves takes $O(n)$ time.
+    \item checking the points in the strip takes $O(n)$ time.
+    \item checking the points in the strip takes $O(n)$ time.
+    \begin{itemize}
+      \item Based on geometry, each point in the strip checks only with 6 points ahead.
+    \end{itemize}
+  \end{itemize}
+
+  The time complexity of the algorithm, according to the master theorem: 
+  \begin{equation}
+    T(n) = 2T\left(\frac{n}{2}\right) + O(n) 
+  \end{equation}
+  Here a = 2, the number of subproblems at each level of recursion.
+  b = 2 is the factor by which the problem size is reduced in each subproblem.
+
+  The time complexity of combining results from the subproblems is $O(n)$. 
+  This leads to the time complexity of the algorithm being $O(n \log n)$.
+
+  
+  The break point for the recursion is when the number of points is less than 3. 
+  But when the number of points is less than 40, brute force approach can be quicker.
 
 \end{document}
