@@ -12,7 +12,7 @@ def closest_pair(points, nb_points):
 
 def closest_pair_recursive(sorted_by_x, sorted_by_y):
     # Base case: if there are 2 or 3 point, use brute force.
-    if len(sorted_by_x) <= 40:
+    if len(sorted_by_x) <= 3:
         return closest_distance_brute_force(sorted_by_x)
     
     left_x, right_x, left_y, right_y = split_lists(sorted_by_x, sorted_by_y)
@@ -37,7 +37,7 @@ def check_strip_distance(strip):
     min_distance = float('inf') # define the minimum distance
     strip_length = len(strip)
     for i in range(len(strip)):
-        for j in range(i +1, min(i + 15, strip_length)): # check max 6 points in the strip on the other side, but 15 points are checked.
+        for j in range(i +1, min(i + 6, strip_length)): # check max 6 points in the strip on the other side, but 15 points are checked.
             dist = distance(strip[i], strip[j]) # this ensures the time complexity is O(n)
             if dist < min_distance:
                 min_distance = dist
