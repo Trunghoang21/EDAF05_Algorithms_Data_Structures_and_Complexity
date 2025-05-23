@@ -83,7 +83,7 @@ class Railway_Planner:
             while v != self.source:
                 u = parent[v]
                 flows[u][v] += path_flow
-                flows[v][u] = flows[u][v]
+                flows[v][u] -= path_flow
                 v = parent[v]
         
 
